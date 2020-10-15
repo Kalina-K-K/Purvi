@@ -1,4 +1,5 @@
 package edu;
+import java.util.Arrays;
 import java.util.Scanner;
 public class Anagram {
 
@@ -7,33 +8,56 @@ public class Anagram {
 		Scanner sc = new Scanner(System.in);
 		String a = sc.nextLine();
 		String b = sc.nextLine();
+		String a1="";
+		String b1="";
 		boolean isAnagram = true;
-		String b2 = b;
-		int lengtha=a.length();
-		for(int i = 0; i < lengtha; i++) {
-			char charIna = a.charAt(i);
-			if (charIna > 'a' && charIna < 'z' || charIna > 'A' && charIna < 'Z') {
-				int positionInb = b2.indexOf(charIna);
-				if(positionInb == -1) {
-					isAnagram=false;
-					break;
-				}else {
-					b2=b2.substring(0, positionInb) + b2.substring(positionInb + 1);
-					System.out.println(b2);
-				}
+		int la=a.length();
+		int lb=b.length();
+		for(int i=0; i<la; i++) {
+			char c=a.charAt(i);
+			if(c>='a'&&c<='z'||c>='A'&&c<='Z') {
+				a1+=c;
 			}
 		}
-		if (isAnagram) {
-			int charsLeftb2 = b2.length();
-			for (int i = 0; i<charsLeftb2; i++) {
-			char currentChar = b2.charAt(i);
-			if(currentChar>='a' && currentChar<='z' || currentChar>='A' && currentChar <= 'Z') {
+		for(int i=0; i<lb; i++) {
+			char c=b.charAt(i);
+			if(c>='a'&&c<='z'||c>='A'&&c<='Z') {
+				b1+=c;
+			}
+		}
+		if(a1.length()!=b1.length()) {
+			isAnagram = false;
+		}else {
+			a1 = a1.toLowerCase();
+			b1 = b1.toLowerCase();
+			char[] a2 = a1.toCharArray();
+			char[] b2 = b1.toCharArray();
+			Arrays.sort(a2);
+			Arrays.sort(b2);
+			String finala = new String (a2);
+			String finalb = new String (b2);
+			if(finala.equals(finalb)) {
+				isAnagram=true;
+			}else {
 				isAnagram=false;
-				break;
 			}
-			}
+//			for(int i=0; i<a1.length(); i++) {
+//				for(int j=0; j<a1.length()-i;j++) {
+//				char min = 'z';	
+//				char d=a1.charAt(i);
+//				char e=a1.charAt(i+1);
+//				if(e<d) {
+//					char swap = d;
+//					
+//				}
+//				}
+//			}
 		}
-		System.out.println(isAnagram ? "is an anagram" : "isn't an anagram");
+		if(isAnagram) {
+			System.out.println("This is an anagram");
+		}else {
+			System.out.println("This isn't an anagram");
+		}
 	}
 
 }
